@@ -32,6 +32,8 @@ set(EXPORT_INCLUDES ${CMAKE_CURRENT_LIST_DIR}/Include)
 
 set(GLOBAL_INCLUDES ${EXPORT_INCLUDES})
 
+set (PLUGIN_DIR bin/OpenNI2/Drivers)
+
 add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/ThirdParty/PSCommon/XnLib/)
 add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/Source/Drivers/OniFile)
 add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/Source/Drivers/PS1080)

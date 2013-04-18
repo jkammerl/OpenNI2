@@ -44,7 +44,7 @@ typedef XnInt XN_FILE_HANDLE;
 #define XN_INVALID_FILE_HANDLE -1
 
 /** A string that specifies the current directory. */ 
-#define XN_FILE_LOCAL_DIR "/usr/local/bin/OpenNI2/Drivers/"
+#define XN_FILE_LOCAL_DIR "@PLUGIN_DIR_TEMPLATE@/"
 
 /** The file directory separator. */ 
 #define XN_FILE_DIR_SEP "/"

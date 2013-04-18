@@ -22,6 +22,11 @@
 endif()
 
 if(UNIX)
+    set (PLUGIN_DIR_TEMPLATE  ${CMAKE_INSTALL_PREFIX}/${PLUGIN_DIR})
+    configure_file(${CMAKE_CURRENT_LIST_DIR}/Include/Linux-x86/XnOSLinux-x86.h.in
+                   ${CMAKE_CURRENT_LIST_DIR}/Include/Linux-x86/XnOSLinux-x86.h
+                   @ONLY)
+
 	set(XnLib_SRC
 	    ${CMAKE_CURRENT_LIST_DIR}/Source/Linux/XnLinuxCriticalSections.cpp
 	    ${CMAKE_CURRENT_LIST_DIR}/Source/Linux/XnLinuxDebug.cpp
@@ -81,4 +86,10 @@ add_library(XnLib SHARED ${XnLib_SRC})
 target_link_libraries(XnLib ${LIBUSB_1_LIBRARIES})
 
 set(GLOBAL_INCLUDES ${GLOBAL_INCLUDES} ${XnLib_INCLUDE_DIR} PARENT_SCOPE)
+
+install(TARGETS XnLib EXPORT OpenNI2-exports
+    RUNTIME DESTINATION bin
+    ARCHIVE DESTINATION lib
+    LIBRARY DESTINATION lib
+)
 

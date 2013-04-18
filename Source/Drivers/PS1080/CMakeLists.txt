@@ -119,4 +119,4 @@ if(MACOSX)
     set_property(TARGET PS1080Lib PROPERTY SUFFIX .dylib)
 endif()
 
-install(TARGETS PS1080Lib DESTINATION bin/OpenNI2/Drivers)
+install(TARGETS PS1080Lib DESTINATION ${PLUGIN_DIR})

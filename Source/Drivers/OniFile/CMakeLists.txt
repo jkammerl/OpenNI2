@@ -29,4 +29,4 @@ if(MACOSX)
     set_property(TARGET OniFileLib PROPERTY SUFFIX .dylib)
 endif()
 
-install(TARGETS OniFileLib DESTINATION bin/OpenNI2/Drivers)
+install(TARGETS OniFileLib DESTINATION ${PLUGIN_DIR})
