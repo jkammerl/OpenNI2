@@ -22,7 +22,7 @@
 endif()
 
 if(UNIX)
-    set (PLUGIN_DIR_TEMPLATE  ${CMAKE_INSTALL_PREFIX}/${PLUGIN_DIR})
+    set (PLUGIN_DIR_TEMPLATE  ${CMAKE_INSTALL_PREFIX}/bin)
     configure_file(${CMAKE_CURRENT_LIST_DIR}/Include/Linux-x86/XnOSLinux-x86.h.in
                    ${CMAKE_CURRENT_LIST_DIR}/Include/Linux-x86/XnOSLinux-x86.h
                    @ONLY)
