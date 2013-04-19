@@ -1,5 +1,8 @@
 
-include_directories(${GLOBAL_INCLUDES})
+include_directories(${EXPORT_INCLUDES}
+                    ${XnLib_INCLUDE_DIR}
+                    ${ONI_FORMATS_INCLUDE}
+                   )
 
 set(OpenNI2_SRC
     Core/OniContext.cpp
@@ -13,6 +16,7 @@ set(OpenNI2_SRC
     Core/OniSyncedStreamsFrameHolder.cpp
     Core/OpenNI.cpp
 
+    Drivers/OniFile/Formats/XnCodec.cpp
     Drivers/OniFile/Formats/XnStreamCompression.cpp
 )
 
@@ -31,3 +35,4 @@ install(TARGETS OpenNI2 EXPORT OpenNI2-exports
     ARCHIVE DESTINATION lib
     LIBRARY DESTINATION lib
 )
+ 

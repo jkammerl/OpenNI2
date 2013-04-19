@@ -2,11 +2,13 @@
 #### OniFile Device
 
 include_directories(
+    ${CMAKE_CURRENT_LIST_DIR}/
+    ${EXPORT_INCLUDES}
+    ${XnLib_INCLUDE_DIR}
     ${CMAKE_CURRENT_LIST_DIR}/Formats/
-    ${GLOBAL_INCLUDES}
 )
 
-set(GLOBAL_INCLUDES ${GLOBAL_INCLUDES} ${CMAKE_CURRENT_LIST_DIR}/Include ${CMAKE_CURRENT_LIST_DIR}/Formats PARENT_SCOPE)
+set(ONI_FORMATS_INCLUDE ${CMAKE_CURRENT_LIST_DIR}/Formats PARENT_SCOPE)
 
 set(OniFile_SRC ${XnLib_SRC}
     ${CMAKE_CURRENT_LIST_DIR}/DataRecords.cpp
@@ -23,10 +25,10 @@ set(OniFile_SRC ${XnLib_SRC}
 add_library(OniFileLib SHARED ${OniFile_SRC})
 target_link_libraries(OniFileLib ${LIBJPEG_LIBRARY})
 
-set(OPENNI2_PLUGINS ${OPENNI2_PLUGINS} OniFileLib PARENT_SCOPE)
-
 if(MACOSX)
     set_property(TARGET OniFileLib PROPERTY SUFFIX .dylib)
 endif()
 
 install(TARGETS OniFileLib DESTINATION ${PLUGIN_DIR})
+
+set(GLOBAL_INCLUDES ${GLOBAL_INCLUDES} ${CMAKE_CURRENT_LIST_DIR}/Include ${CMAKE_CURRENT_LIST_DIR}/Formats PARENT_SCOPE)

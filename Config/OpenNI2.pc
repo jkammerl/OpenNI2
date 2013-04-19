@@ -3,9 +3,9 @@ exec_prefix=${prefix}
 libdir=${exec_prefix}/lib
 includedir=${prefix}/include/OpenNI2
 
-Name: OpenNI
+Name: OpenNI2
 Description: A general purpose driver for all OpenNI cameras.
-Version: __VERSION__
-Requires: libusb-1.0 >= 1.0.8, 
+Version: 2.0.0
+Requires: libusb-1.0 >= 1.0.8
 Cflags: -I${includedir}
 Libs: -L${libdir} -lOpenNI2

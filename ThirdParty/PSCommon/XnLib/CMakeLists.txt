@@ -22,7 +22,10 @@
 endif()
 
 if(UNIX)
-    set (PLUGIN_DIR_TEMPLATE  ${CMAKE_INSTALL_PREFIX}/bin)
+    set (PLUGIN_DIR_TEMPLATE  ${CMAKE_INSTALL_PREFIX}bin)
+    
+    set (PLUGIN_CONFIG_DIR_TEMPLATE ${PLUGIN_CONFIG_DIR})
+    
     configure_file(${CMAKE_CURRENT_LIST_DIR}/Include/Linux-x86/XnOSLinux-x86.h.in
                    ${CMAKE_CURRENT_LIST_DIR}/Include/Linux-x86/XnOSLinux-x86.h
                    @ONLY)
@@ -82,8 +85,10 @@ endif()
 
 include_directories(${XnLib_INCLUDE_DIR})
 
+set (XnLib_INCLUDE_DIR ${XnLib_INCLUDE_DIR} PARENT_SCOPE) 
+
 add_library(XnLib SHARED ${XnLib_SRC})
-target_link_libraries(XnLib ${LIBUSB_1_LIBRARIES})
+target_link_libraries(XnLib ${LIBUSB_1_LIBRARIES} dl pthread)
 
 set(GLOBAL_INCLUDES ${GLOBAL_INCLUDES} ${XnLib_INCLUDE_DIR} PARENT_SCOPE)
 

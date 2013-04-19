@@ -22,13 +22,13 @@
 #include "OniStreamFrameHolder.h"
 #include <XnLog.h>
 
-static const char* ONI_CONFIGURATION_FILE = XN_FILE_LOCAL_DIR "OpenNI.ini";
+static const char* ONI_CONFIGURATION_FILE = XN_FILE_CONFIG_DIR "/OpenNI.ini";
 #if (XN_PLATFORM == XN_PLATFORM_WIN32) && (_M_X64)
 static const char* ONI_ENV_VAR_DRIVERS_REPOSITORY = "OPENNI2_DRIVERS_PATH64";
 #else
 static const char* ONI_ENV_VAR_DRIVERS_REPOSITORY = "OPENNI2_DRIVERS_PATH";
 #endif
-static const char* ONI_DEFAULT_DRIVERS_REPOSITORY = XN_FILE_LOCAL_DIR "OpenNI2" XN_FILE_DIR_SEP "Drivers";
+static const char* ONI_DEFAULT_DRIVERS_REPOSITORY = XN_FILE_LOCAL_DIR "OpenNI2" XN_FILE_DIR_SEP "Drivers/";
 
 ONI_NAMESPACE_IMPLEMENTATION_BEGIN
 
@@ -189,7 +189,12 @@ XnStatus Context::loadLibraries(const char* directoryName)
 
 	for (int i = 0; i < nFileCount; ++i)
 	{
-		DeviceDriver* pDeviceDriver = XN_NEW(DeviceDriver, acsFileList[i], m_errorLogger);
+	        XnChar driverURL[XN_FILE_MAX_PATH] = "";
+	        XN_VALIDATE_STR_APPEND(driverURL, directoryName, XN_FILE_MAX_PATH, nRetVal);
+                XN_VALIDATE_STR_APPEND(driverURL, XN_FILE_DIR_SEP, XN_FILE_MAX_PATH, nRetVal);
+                XN_VALIDATE_STR_APPEND(driverURL, acsFileList[i], XN_FILE_MAX_PATH, nRetVal);
+
+		DeviceDriver* pDeviceDriver = XN_NEW(DeviceDriver, driverURL, m_errorLogger);
 		if (pDeviceDriver == NULL || !pDeviceDriver->isValid())
 		{
 			xnLogVerbose(XN_LOG_MASK_ALL, "Couldn't use file '%s' as a device driver", acsFileList[i]);
